@@ -1,5 +1,9 @@
 import { shade } from 'polished';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+interface FormProps {
+  hasError: boolean;
+}
 
 export const Title = styled.h1`
   max-width: 600px;
@@ -14,7 +18,7 @@ export const Title = styled.h1`
   }
 `;
 
-export const Form = styled.form`
+export const Form = styled.form<FormProps>`
   margin-top: 40px;
   max-width: 700px;
 
@@ -26,6 +30,15 @@ export const Form = styled.form`
     padding: 0 24px;
     border: 0;
     border-radius: 8px 0 0 8px;
+
+    border: 2px solid transparent;
+    border-right: 0;
+
+    ${(props) =>
+      props.hasError &&
+      css`
+        border-color: #c53030;
+      `}
 
     color: #a3a3a3;
 
@@ -47,6 +60,19 @@ export const Form = styled.form`
     &:hover {
       background: ${shade(0.2, '#582fe4')};
     }
+  }
+`;
+
+export const Error = styled.span`
+  display: block;
+  color: #c53030;
+  margin-top: 8px;
+
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-left: 10px;
   }
 `;
 
